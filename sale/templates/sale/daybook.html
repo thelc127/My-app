@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block head_title %}DayBook | {{ block.super }}{% endblock %} {% block content %}
+<h1>Today's Entry</h1>
+{% for sale in sales %} purchasers: {{ sale.purchasers}} | Date: {{ sale.date}}
+<br> Invoice: {{ sale.invoice }} | Ch No: {{sale.ch_no}}
+<br> Sales Details:
+<ol>
+    {% for salesitems in sale.saledetail_set.all %}
+    <li>Product Name: {{ salesitems.product_name }} </li>
+    Quantity: {{salesitems.quantity}}
+    <br> Rate: {{salesitems.rate}}
+    <br> Total: {{salesitems.total}}
+    <br> Remarks: {{salesitems.remarks}}
+    <br> {% endfor %}
+</ol>
+{% empty %}
+<li>No Sales yet.</li>
+{% endfor %} {% endblock %}

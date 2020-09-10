@@ -1,0 +1,57 @@
+<<<<<<< HEAD
+{% extends "base.html" %} {% block head_title %}Day-Book | {{ block.super }}{% endblock %} {% block content %}
+<h1>Today's Entry</h1>
+{% for purchase in purchases %} Vendor: {{ purchase.vendor}} | Date: {{ purchase.date}}
+<br> Invoice: {{ purchase.invoice }} | Ch No: {{purchase.ch_no}}
+<br> Purchase Details:
+<ol>
+    {% for purchaseitems in purchase.purchasedetail_set.all %}
+    <li>Product Name: {{ purchaseitems.product_name }} </li>
+    Quantity: {{purchaseitems.quantity}}
+    <br> Rate: {{purchaseitems.rate}}
+    <br> Total: {{purchaseitems.total}}
+    <br> Remarks: {{purchaseitems.remarks}}
+    <br> {% endfor %}
+</ol>
+{% empty %}
+<li>No Purchases Today.</li>
+{% endfor %} {% endblock %}
+=======
+{% extends "base.html" %} {% block head_title %}Day Book | {{ block.super }}{% endblock %} 
+{% block content %}
+<h1>PurchaseMade</h1>
+<table class="table table-dark table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Details</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Total</th>
+            <th>Remarks</th>
+        </tr>
+        {% for purchase in purchases %}
+        <tr>
+            <td> Vendor: {{ purchase.vendor}} | Date: {{ purchase.date}}
+                <br> Invoice: {{ purchase.invoice }} | Ch No: {{purchase.ch_no}}</td>
+        </tr>
+        {% for purchaseitems in purchase.purchasedetail_set.all %}
+
+        <tr>
+            <div>
+                <td></td>
+                <td> {{ purchaseitems.product_name }}</td>
+                <td>{{purchaseitems.quantity}}</td>
+                <td>{{purchaseitems.rate}}</td>
+                <td>{{purchaseitems.total}}</td>
+                <td>{{purchaseitems.remarks}}</td>
+            </div>
+
+        </tr>
+        {% endfor %} {% empty %}
+        <li>No Purchase yet.</li>
+        {% endfor %}
+
+    </thead>
+</table> {% endblock %}
+>>>>>>> 82e59ce9291006bf8366a503b77ec616a2f2f187

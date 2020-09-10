@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block head_title %}Purchase Details | {{ block.super }}{% endblock %} {% block content %} {% load static %}
+<div class="container-fluid">
+    <h3>
+        Invoice : {{ purchase.invoice }} Cheque : {{ purchase.ch_no }} Vendor : {{ purchase.vendor}} </h3>
+    <h2> Add Product</h2>
+    <form method="POST" method="productcreate/">
+            
+        {% csrf_token %} {{ form.non_field_errors }}
+        <div class="form-group">
+            {{product_form.purchase.errors}} {{ product_form.purchase.label_tag }} {{product_form.purchase}}
+        </div>
+        <div class="form-group">
+            {{product_form.created_at.errors}} {{ product_form.created_at.label_tag }} {{product_form.created_at}}
+        </div>
+
+        <div class="form-group">
+            {{product_form.product_name.errors}} {{ product_form.product_name.label_tag }} {{product_form.product_name}}
+        </div>
+
+        <div class="form-group">
+            {{product_form.quantity.errors}} {{ product_form.quantity.label_tag }} {{product_form.quantity}}
+        </div>
+        <div class="form-group">
+            {{product_form.rate.errors}} {{product_form.rate.label_tag }} {{product_form.rate}}
+        </div>
+
+        <div class="form-group">
+            {{product_form.total.errors}} {{ product_form.total.label_tag }} {{product_form.total}}
+        </div>
+
+        <div class="form-group">
+            {{product_form.remarks.errors}} {{product_form.remarks.label_tag }} {{product_form.remarks}}
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<script src="{% static 'js/main.js' %}"></script> {% endblock %}

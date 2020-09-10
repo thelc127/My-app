@@ -1,0 +1,55 @@
+ {% extends "base.html" %} {% block head_title %}Inventory | {{ block.super }}{% endblock %} {% block content %}
+<div class="container-fluid ">
+    <div class="row mt-1 p-3 bg-gradient-warning">
+        <div class="card col text-danger mr-1">
+            <div class="card-body">
+                <h4 class="card-title text-primary">Notifications</h4>
+                <hr> {% for item in items %} {% if item.item_quantity < 20 %} {{item.item_name}} is at Low stock <br>
+                    {% endif %} {% empty %} No Notifications {% endfor %}
+            </div>
+        </div>
+        <div class="card col text-dark ml-1 mr-1">
+            <div class="card-body">
+                <h4 class="card-title text-primary">Recent Sales</h4>
+                <hr>
+                <div>
+                    {% for sale in sales %} Purchaser: {{sale.purchasers}}
+                    <br> Date:{{sale.date}}
+                    <br> {% for saleitem in sale.saledetail_set.all %}
+                    <div>
+                        Product :{{ saleitem.product_name }} Quantiy :{{saleitem.quantity}}
+                        <br>
+                    </div>
+                    {% endfor %}
+                    <hr> {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card col text-dark ml-1 mr-1 ">
+            <div class="card-body">
+                <h4 class="card-title text-primary">Recent Purchases</h4>
+                <hr> 
+                <div>
+                    {% for purchase in purchases %} Vendor: {{purchase.vendor}}
+                    <br> Date:{{purchase.date}}
+                    <br> {% for purchaseitem in purchase.purchasedetail_set.all %}
+                    <div>
+                        Product :{{ purchaseitem.product_name }} Quantiy :{{purchaseitem.quantity}}
+                        <br>
+                    </div>
+                    {% endfor %}
+                    <hr> {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card col text-dark ml-1">
+            <div class="card-body">
+                <h4 class="card-title text-primary">Top Customers</h4>
+                <hr> Top Customers here
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

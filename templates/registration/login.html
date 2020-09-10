@@ -1,0 +1,47 @@
+{% load static%} {% block content %}
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<style>
+  .content {
+    display: none;
+  }
+
+  .preload {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+
+  body {
+    background: #2c2b2b !important;
+    color: antiquewhite !important;
+  }
+
+  /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
+<div class="preload">
+  <img src="{% static 'images/fluid-loader.gif' %}" />
+</div>
+<div class="content" align="center">
+
+  <h1 class ="bg-light text-warning">Welcome to My Ledger</h1>
+    <div class="card " style="width: 18rem;">
+      <h3 class="card-title">Proceed with your Login: </h3>
+      <div class="form-group">
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+</div>
+<script>
+  $(function () {
+    $(".preload").fadeOut(2000, function () {
+      $(".content").fadeIn(500);
+    });
+  });
+</script> {% endblock %}

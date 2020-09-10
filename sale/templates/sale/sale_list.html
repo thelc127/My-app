@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block head_title %}Sales History | {{ block.super }}{% endblock %} {% block content %}
+
+<h1>SalesMade</h1>
+<table class="table table-dark table-hover">
+    <tr>
+        <th>Details</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Rate</th>
+        <th>Total</th>
+        <th>Remarks</th>
+    </tr>
+    {% for sale in object_list %}
+    <tr>
+        <td> Vendor: {{sale.purchasers}} | Date: {{ sale.date}}
+            <br> Invoice: {{ sale.invoice }} | Ch No: {{sale.ch_no}}</td>
+        {% for saleitems in sale.saledetail_set.all %}
+
+        <tr>
+            <td></td>
+            <td>{{ saleitems.product_name }}</td>
+            <td>{{saleitems.quantity}}</td>
+            <td>{{saleitems.rate}}</td>
+            <td>{{saleitems.total}}</td>
+            <td>{{saleitems.remarks}}</td>
+        </tr>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>
+            <hr>
+        </td>
+    </tr>
+    {% empty %} No Sales yet. {% endfor %}
+
+
+</table> {% endblock %}

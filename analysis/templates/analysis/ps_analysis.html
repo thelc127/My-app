@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block head_title %}Graphical Analysis | {{ block.super }}{% endblock %} {% block content %}
+<div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Purchase/Sale of Product this Month'
+        },
+        xAxis: {
+            categories: {{ categories| safe }}
+        },
+        series: [{
+            name: 'Purchase',
+            data: {{ purchase_no }},
+            color: 'blue'
+        }
+            , {
+            name: 'Sale',
+            data: {{ sale_no }},
+            color: 'red'
+        }
+        ]
+    });
+</script> {% endblock content %}

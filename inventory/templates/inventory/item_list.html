@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block head_title %}Inventory | {{ block.super }}{% endblock %} {% block content %}
+
+<h1>Inventory</h1>
+<hr class="bg-dark">
+<div class="container">
+
+        <form method="GET" action="">
+            <div class="row mb-1">
+                <div class="col-2">
+                    <input class="form-control " type="text" name="q" placeholder=" Search Items" value="{{ request.GET.q }}">
+                </div>
+                <div class="col-2">
+                    <input type="button" class="btn btn-info" value="Search"> </div>
+            </div>
+        </form>
+    <table class="table table-primary table-hover">
+        <thead class="thead-info">
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        {% for item in object_list %}
+        <tr>
+            <td>{{item.item_name}}</td>
+            <td>{{item.item_quantity}}</td>
+            <td>{{item.item_rate}}</td>
+            <td>{% if item.item_quantity < 20 %}<div class="text-danger">Low Stock </div>{% else %}
+<div class="text-success">Available </div>{% endif %}</td>
+</tr>
+{% empty %} Inventory is Empty. {% endfor %}
+</table>
+</div>
+{% endblock %}

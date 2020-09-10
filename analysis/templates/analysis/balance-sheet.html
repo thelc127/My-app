@@ -1,0 +1,64 @@
+{% extends "base.html" %}{% block head_title %}Profit-Loss | {{ block.super }}{% endblock %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            Purchase
+        </div>
+        <div class="col-6">
+            Sales
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <ol>
+                {% for purchase in purchases %}
+                <li> Vendor: {{ purchase.vendor}}</li> Date: {{ purchase.date}}
+                <br> Invoice: {{ purchase.invoice }} | Ch No: {{purchase.ch_no}}
+                <ul>
+                    {% for purchaseitems in purchase.purchasedetail_set.all %}
+
+                    <div>
+                        <li> Product Name: {{ purchaseitems.product_name }}</li>
+                        Quantity: {{purchaseitems.quantity}}
+                        <br> Rate: {{purchaseitems.rate}}
+                        <br> Total: {{purchaseitems.total}}
+                    </div>
+                    {% endfor %}
+                </ul> {% empty %}
+                <li> NO Purchase this month.</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="col-6">
+            <ol>
+                {% for sale in sales %}
+                <li> Purchaser: {{ sale.purchasers}}</li> Date: {{ sale.date}}
+                <br> Invoice: {{ sale.invoice }} | Ch No: {{sale.ch_no}}
+                <ul>
+                    {% for saleitems in sale.saledetail_set.all %}
+
+                    <div>
+                        <li> Product Name: {{ saleitems.product_name }}</li>
+                        Quantity: {{saleitems.quantity}}
+                        <br> Rate: {{saleitems.rate}}
+                        <br> Total: {{saleitems.total}}
+                    </div>
+                    {% endfor %}
+                </ul> {% empty %}
+                <li>No Sales this month.</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            Net Profit:
+        </div>
+
+        <div class="col-6">
+            Rs. {{net}}
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
