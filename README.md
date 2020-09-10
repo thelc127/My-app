@@ -1,5 +1,5 @@
-# MyLedger
-My Ledger’ is a Business Accounting System to manage and analyse
+# My app
+It is a Business Accounting System to manage and analyse
 the import/export, purchase/sales, journals and balance sheets of a business firm.
 ### Getting Started
 Clone this project using ssh if possible else use https.
